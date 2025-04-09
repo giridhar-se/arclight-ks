@@ -22,6 +22,7 @@ services:
     volumes:
       - ../solr/arclight/conf:/solr_config
       - ../solr/arclight/data:/var/solr/data/
+      
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
@@ -40,6 +41,7 @@ services:
       - solr
     volumes:
       - ../my-ead/atom-export-ead:/opt/app-root/finding-aid-data
+      - ../app:/opt/app-root/app
     ports:
       - "3000:3000"
     environment:
@@ -57,3 +59,4 @@ services:
           action: rebuild
         - path: ../config
           action: rebuild
+          

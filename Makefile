@@ -106,3 +106,11 @@ audit:
 .PHONY: full-setup
 full-setup: solr-permissions build start db-setup index-solr
 
+# to the collection_id_ssi field presented"
+id-ssi:
+	curl 'http://localhost:8983/solr/arclight/select?q=*:*&rows=1&fl=id,collection_id_ssi`
+
+# to remove indexed collection in the solr
+solr-reset:
+	curl 'http://localhost:8983/solr/arclight/update?commit=true' -H 'Content-Type: text/xml' --data-binary '<delete><query>*:*</query></delete>'
+
