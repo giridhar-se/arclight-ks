@@ -11,7 +11,8 @@ class SolrDocument
 
   attribute :accessrestrict, :array, 'accessrestrict_html_tesm'
   attribute :userestrict, :array, 'userestrict_html_tesm'
-  attribute :physdesc, :array, 'physdesc_tesim'
+  # as per the request of ticket 520584
+  # attribute :physdesc, :array, 'physdesc_tesim'
   attribute :phystech, :array, 'phystech_html_tesm'
   attribute :accessrestrict_collection_banner, :array, 'accessrestrict_collection_banner_html_tesm'
 

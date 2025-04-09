@@ -31,7 +31,7 @@ module DulArclight
 
     config.action_mailer.default_options = {
       from: format('dul-arclight@%s', ENV.fetch('APPLICATION_HOSTNAME', 'localhost')),
-      reply_to: 'no-reply@duke.edu'
+      reply_to: 'libsc@k-state.edu'
     }
     config.action_mailer.default_url_options = {
       host: ENV.fetch('APPLICATION_HOSTNAME', 'localhost')

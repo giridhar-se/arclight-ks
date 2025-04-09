@@ -491,8 +491,9 @@ class CatalogController < ApplicationController
                                            two_words_connector: '<br/>',
                                            last_word_connector: '<br/>'
                                          }
-
-    config.add_summary_field 'collection_unitid', accessor: true, label: 'Collection ID'
+    
+    # removed field as the per the ticket 20534
+    # config.add_summary_field 'collection_unitid', accessor: true, label: 'Collection ID'
 
     # DUL CUSTOMIZATION: Add UA Record Group hierarchical facet.
     config.add_summary_field 'ua_record_group_ssim', label: 'University Archives Record Group',
@@ -524,14 +525,18 @@ class CatalogController < ApplicationController
     config.add_background_field 'scopecontent', field: 'scopecontent_html_tesm', helper_method: :render_html_tags
     config.add_background_field 'bioghist', field: 'bioghist_html_tesm', helper_method: :render_html_tags
     config.add_background_field 'acqinfo', field: 'acqinfo_ssim', helper_method: :render_html_tags
-    config.add_background_field 'appraisal', field: 'appraisal_html_tesm', helper_method: :render_html_tags
-    config.add_background_field 'custodhist', field: 'custodhist_html_tesm', helper_method: :render_html_tags
+   
+    # removed field as the per the ticket 20534
+    # config.add_background_field 'appraisal', field: 'appraisal_html_tesm', helper_method: :render_html_tags
+    # config.add_background_field 'custodhist', field: 'custodhist_html_tesm', helper_method: :render_html_tags
     config.add_background_field 'processinfo', field: 'processinfo_html_tesm', helper_method: :render_html_tags
     config.add_background_field 'arrangement', field: 'arrangement_html_tesm', helper_method: :render_html_tags
     config.add_background_field 'accruals', field: 'accruals_html_tesm', helper_method: :render_html_tags
     # DUL CUSTOMIZATION: we removed phystech here as we treat it as a restriction
     # config.add_background_field 'phystech', field: 'phystech_html_tesm', helper_method: :render_html_tags
-    config.add_background_field 'physloc', field: 'physloc_html_tesm', helper_method: :render_html_tags
+   
+    # removed field as the per the ticket 20534 
+    # config.add_background_field 'physloc', field: 'physloc_html_tesm', helper_method: :render_html_tags
     # DUL CUSTOMIZATION: we moved physdesc up into a summary field to be near extent
     # config.add_background_field 'physdesc', field: 'physdesc_tesim', helper_method: :render_html_tags
     config.add_background_field 'physfacet', field: 'physfacet_tesim', helper_method: :render_html_tags
@@ -638,12 +643,12 @@ class CatalogController < ApplicationController
       last_word_connector: '<br/>'
     }
 
-    config.add_component_field 'physdesc', field: 'physdesc_tesim', helper_method: :render_html_tags,
-                                           separator_options: {
-                                             words_connector: '<br/>',
-                                             two_words_connector: '<br/>',
-                                             last_word_connector: '<br/>'
-                                           }
+    # config.add_component_field 'physdesc', field: 'physdesc_tesim', helper_method: :render_html_tags,
+    #                                        separator_options: {
+    #                                          words_connector: '<br/>',
+    #                                          two_words_connector: '<br/>',
+    #                                          last_word_connector: '<br/>'
+    #                                        }
 
     config.add_component_field 'scopecontent', field: 'scopecontent_html_tesm', helper_method: :render_html_tags
 
