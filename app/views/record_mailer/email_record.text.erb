@@ -4,8 +4,14 @@
 <%= t('blacklight.email.text.message', message: @message) -%>
 
 <% @documents.each do |document| -%>
-<%= render Blacklight::DocumentMetadataComponent.new(fields: document_presenter(document).field_presenters(blacklight_config.email_fields), tag: nil, field_layout: Blacklight::MetadataFieldPlainTextLayoutComponent, field_presenter_options: { format: 'text' }) -%>
-    <%= t('blacklight.email.text.url', url: polymorphic_url(document, @url_gen_params)) -%>
-
-
+#     <% Rails.logger.info("Document: #{document.inspect}") -%>
+#     <script>
+#         console.log("Document: <%= j document.inspect %>");
+#     </script>
+<%= render_document_metadata(document) -%>
+    <% if document.respond_to?(:to_model) && document.to_model.present? -%>
+      <%= t('blacklight.email.text.url', url: polymorphic_url(document, @url_gen_params)) -%>
+    <% else -%>
+      <%= t('blacklight.email.text.invalid_document') -%>
+    <% end -%>
 <% end %>

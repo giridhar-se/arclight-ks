@@ -25,7 +25,7 @@
   <%# No Bib ID = not requestable; email someone instead %>
   <% else %>
       <%= link_to t('arclight.request.container'),
-        ['mailto:', collection&.repository_config&.contact_info].join,
+        ['mailto: libsc@k-state.edu', collection&.repository_config&.contact_info].join,
         target: '_blank',
         class: request_btn_classes,
         title: t('dul_arclight.views.show.sidebar.request.email',
