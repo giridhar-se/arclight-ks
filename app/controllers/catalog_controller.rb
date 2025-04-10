@@ -643,12 +643,12 @@ class CatalogController < ApplicationController
       last_word_connector: '<br/>'
     }
 
-    # config.add_component_field 'physdesc', field: 'physdesc_tesim', helper_method: :render_html_tags,
-    #                                        separator_options: {
-    #                                          words_connector: '<br/>',
-    #                                          two_words_connector: '<br/>',
-    #                                          last_word_connector: '<br/>'
-    #                                        }
+    config.add_component_field 'physdesc', field: 'physdesc_tesim', helper_method: :render_html_tags,
+                                           separator_options: {
+                                             words_connector: '<br/>',
+                                             two_words_connector: '<br/>',
+                                             last_word_connector: '<br/>'
+                                           }
 
     config.add_component_field 'scopecontent', field: 'scopecontent_html_tesm', helper_method: :render_html_tags
 
