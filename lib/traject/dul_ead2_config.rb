@@ -74,7 +74,7 @@ end
 # than e.g., 03:55.
 to_field 'ua_record_group_ssim' do |_record, accumulator, context|
   id = context.output_hash['unitid_ssm']&.first&.split('.')
-  if id[0] == 'UA'
+  if id&.any? && id[0] == 'UA'
     group = id[1]
     subgroup = id[2]
     accumulator << DulArclight::UaRecordGroup.new(group:).label

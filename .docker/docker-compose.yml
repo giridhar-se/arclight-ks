@@ -42,6 +42,7 @@ services:
     volumes:
       - ../my-ead/atom-export-ead:/opt/app-root/finding-aid-data
       - ../app:/opt/app-root/app
+      - ../lib:/opt/app-root/lib
     ports:
       - "3000:3000"
     environment:
@@ -56,7 +57,14 @@ services:
     develop:
       watch:
         - path: ../app
+          target: /opt/app-root/app
+          action: rebuild
+        - path: ../my-ead
+          target: /opt/app-root/app/finding-aid-data
+          action: rebuild
+        - path: ../lib
+          target: /opt/app-root/lib
           action: rebuild
         - path: ../config
+          target: /opt/app-root/config
           action: rebuild
-          
