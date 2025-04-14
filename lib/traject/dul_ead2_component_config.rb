@@ -28,6 +28,35 @@ to_field 'parent_ssim' do |_record, _accumulator, context|
   context.output_hash['parent_ssim'] = nil
 end
 
+# to_field 'id', single: true do |record, accumulator, context|
+#   puts "[DEBUG] Generating ID for collection..."
+
+#   eadid_el = record.at_xpath('/ead/eadheader/eadid')
+#   eadid_value = eadid_el&.text&.strip
+#   eadid_identifier = eadid_el&.attribute('identifier')&.value&.strip
+
+#   # Fallback logic: use identifier if text is blank
+#   base_id = eadid_value.presence || eadid_identifier
+
+#   raise Arclight::Exceptions::IDNotFound, 'Missing both <eadid> text and identifier' if base_id.blank?
+
+#   normalized_id = base_id.gsub('/', '-')
+#   puts "[DEBUG] Final collection ID: #{normalized_id}"
+#   accumulator << normalized_id
+# end
+
+# to_field '_root_', single: true do |record, accumulator|
+#   eadid_el = record.at_xpath('/ead/eadheader/eadid')
+#   eadid_value = eadid_el&.text&.strip
+#   eadid_identifier = eadid_el&.attribute('identifier')&.value&.strip
+
+#   base_id = eadid_value.presence || eadid_identifier
+#   normalized_id = base_id.gsub('/', '-') if base_id.present?
+
+#   accumulator << normalized_id
+# end
+
+
 # DUL CUSTOMIZATION: Separate/additional indexing treatment for these fields
 # on the component level beyond how they are handled as SEARCHABLE_NOTES in
 # core config. We have highly customized features for capturing/presenting
