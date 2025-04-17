@@ -643,6 +643,15 @@ class CatalogController < ApplicationController
       last_word_connector: '<br/>'
     }
 
+    # config.add_component_field 'barcode', field: 'barcode_ssim', label: 'Barcode', helper_method: :render_html_tags
+    config.add_component_field 'barcode',
+      field: 'barcode_ssim',
+      label: 'Barcode',
+      helper_method: :render_barcode_list,
+      if: lambda { |_context, _field_config, document|
+        document.normalized_title&.match?(/Box\s+\d+/i)
+      }
+
     config.add_component_field 'physdesc', field: 'physdesc_tesim', helper_method: :render_html_tags,
                                            separator_options: {
                                              words_connector: '<br/>',

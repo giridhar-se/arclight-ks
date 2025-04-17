@@ -28,33 +28,21 @@ to_field 'parent_ssim' do |_record, _accumulator, context|
   context.output_hash['parent_ssim'] = nil
 end
 
-# to_field 'id', single: true do |record, accumulator, context|
-#   puts "[DEBUG] Generating ID for collection..."
+to_field 'barcode_ssim' do |record, accumulator, context|
+  containers = record.xpath('/ead/archdesc/did/container')
 
-#   eadid_el = record.at_xpath('/ead/eadheader/eadid')
-#   eadid_value = eadid_el&.text&.strip
-#   eadid_identifier = eadid_el&.attribute('identifier')&.value&.strip
-
-#   # Fallback logic: use identifier if text is blank
-#   base_id = eadid_value.presence || eadid_identifier
-
-#   raise Arclight::Exceptions::IDNotFound, 'Missing both <eadid> text and identifier' if base_id.blank?
-
-#   normalized_id = base_id.gsub('/', '-')
-#   puts "[DEBUG] Final collection ID: #{normalized_id}"
-#   accumulator << normalized_id
-# end
-
-# to_field '_root_', single: true do |record, accumulator|
-#   eadid_el = record.at_xpath('/ead/eadheader/eadid')
-#   eadid_value = eadid_el&.text&.strip
-#   eadid_identifier = eadid_el&.attribute('identifier')&.value&.strip
-
-#   base_id = eadid_value.presence || eadid_identifier
-#   normalized_id = base_id.gsub('/', '-') if base_id.present?
-
-#   accumulator << normalized_id
-# end
+  containers.each_with_index do |container, index|
+    text = container.text.strip
+    # Match both "Box 1" and a barcode like A83412079231
+    if text =~ /(Box\s*\d+)[,\s]*(A\d{11})/
+      box = $1.strip
+      barcode = $2.strip
+      pair = "#{box}|#{barcode}"
+      accumulator << pair
+      $stderr.puts "[INDEXER][#{index}] => barcode_ssim: #{pair}"
+    end
+  end
+end
 
 
 # DUL CUSTOMIZATION: Separate/additional indexing treatment for these fields
