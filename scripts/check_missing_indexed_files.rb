@@ -24,8 +24,6 @@ end.compact.to_set
 
 # 3. Find missing files that are not indexed
 missing = local_eadids - indexed_eadids
-
-puts "\n🔍 Files present in folder but NOT indexed in Solr:"
 missing.each { |id| puts "  - #{id}" }
 
 puts "\n Total missing from Solr: #{missing.size}"

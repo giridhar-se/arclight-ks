@@ -35,14 +35,15 @@ class CatalogController < ApplicationController
     ## Enable getting JSON at /raw endpoint
     config.raw_endpoint.enabled = true
 
-    ## Default parameters to send to solr for all search-like requests. See also SearchBuilder#processed_parameters
+    ## Default parameters to send to solr for all search-like requests. 
+    # See also SearchBuilder #processed_parameters
     config.default_solr_params = {
       rows: 10,
       fl: '*,collection:[subquery]',
       'collection.q': '{!terms f=id v=$row._root_}',
       'collection.defType': 'lucene',
       'collection.fl': '*',
-      'collection.rows': 1
+      'collection.rows': 1,
     }
 
     # Sets the indexed Solr field that will display with highlighted matches
@@ -353,6 +354,20 @@ class CatalogController < ApplicationController
       field.include_in_advanced_search = false
     end
 
+    config.add_search_field 'barcode' do |field|
+      field.label = 'Barcode'
+      field.qt = 'search'
+      field.key = 'Barcode'
+      # which enables you barcode in the global search.
+      field.include_in_simple_select = true 
+      # enables you to search barcode in the advanced search.
+      field.include_in_advanced_search = true
+      field.solr_parameters = {
+        'qf' => 'barcode_tesim',
+        'pf' => 'barcode_tesim'
+      }
+    end
+    
     config.add_search_field 'within_collection' do |field|
       field.include_in_simple_select = false
       field.include_in_advanced_search = false

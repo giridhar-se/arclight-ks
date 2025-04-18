@@ -39,7 +39,16 @@ to_field 'barcode_ssim' do |record, accumulator, context|
       barcode = $2.strip
       pair = "#{box}|#{barcode}"
       accumulator << pair
-      $stderr.puts "[INDEXER][#{index}] => barcode_ssim: #{pair}"
+    end
+  end
+end
+
+to_field 'barcode_tesim' do |record, accumulator, context|
+  record.xpath('/ead/archdesc/did/container').each do |container|
+    text = container.text.strip
+    if text =~ /A\d{11}/
+      barcode = text[/A\d{11}/]
+      accumulator << barcode.strip
     end
   end
 end
