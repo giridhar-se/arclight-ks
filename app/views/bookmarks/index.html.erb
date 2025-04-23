@@ -38,3 +38,24 @@
 
 <%# DUL CUSTOMIZATION: add a modal for emailing the bookmarks. -%>
 <%= render 'modal_bookmarks_email' %>
+
+<%# Ksul CUSTOMIZATION: add a button to request items from the Email Book Request . -%>
+<script type="text/javascript">
+  document.addEventListener("turbo:load", function () {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("from") === "userrequest") {
+      const tryClickEmail = () => {
+        const emailBtn = document.querySelector('#email-bookmarks-button');
+        if (emailBtn) {
+          emailBtn.click();
+          params.delete("from");
+          const newUrl = window.location.pathname + (params.toString() ? `?${params.toString()}` : '');
+          window.history.replaceState({}, '', newUrl);
+        } else {
+          setTimeout(tryClickEmail, 100);
+        }
+      };
+      tryClickEmail();
+    }
+  });
+</script>
