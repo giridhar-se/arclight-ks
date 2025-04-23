@@ -35,8 +35,8 @@ module ApplicationHelper
 
     Rails.logger.info("[Check response] email36 #{documents} bookmarked documents.")
 
-    body = +"Hello" 
-    body << "I would like to request access to the following items 
+    body = +"Hello " 
+    body << " I would like to request access to the following items 
     %0A%0A"
 
     documents.each do |doc|
