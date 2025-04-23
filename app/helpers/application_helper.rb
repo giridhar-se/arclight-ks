@@ -53,7 +53,7 @@ module ApplicationHelper
 
     body << "Thank you."
 
-    "mailto:#{mailto}?subject=#{CGI.escape(subject)}&body=#{body}"
+    "mailto:#{mailto}?subject=#{ERB::Util.url_encode(subject)}&body=#{body}"
   end
 
   def host_url
